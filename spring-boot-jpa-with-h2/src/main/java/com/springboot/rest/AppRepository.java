@@ -18,9 +18,9 @@ public class AppRepository implements ApplicationRepository {
 
         List<Application> apps = jtm.query(sql, new BeanPropertyRowMapper(Application.class));
 
-        for (int i = 0; i < apps.size(); i++){
-            System.out.print(apps.get(i).getDtCreated().toString());
-        }
+//        for (int i = 0; i < apps.size(); i++){
+//            System.out.print(apps.get(i).getDtCreated().toString());
+//        }
 
         return apps;
     }
@@ -32,8 +32,8 @@ public class AppRepository implements ApplicationRepository {
                 "  WHERE DT_CREATED = (SELECT  MAX(DT_CREATED) FROM "+
                 " (SELECT * FROM APPLICATION WHERE CONTACT_ID = ? )) ";
 
-            Application app = (Application) jtm.queryForObject(sql, new Object[]{contactId},
-                    new BeanPropertyRowMapper(Application.class));
+            Application app = (Application) (jtm.queryForObject(sql, new Object[]{contactId}, //new ApplicationRowMapper()));
+                    new BeanPropertyRowMapper(Application.class)));
 
 
 

@@ -26,12 +26,14 @@ public class AppRestController {
 
     @RequestMapping("/apps/{contactId}")
     public Application appById(@PathVariable Long contactId){
-        Application app = new Application();
+        Application app = null;
         try {
             app = applicationRepository.findById(contactId);
 
         }catch (Exception e){
-            app.setProductName("Invalid data");
+            System.err.print(e.getCause());
+
+
 
         }
         finally {
